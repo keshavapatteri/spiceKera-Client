@@ -1,0 +1,128 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
+export const CommonLogin = () => {
+  const [isSignup, setIsSignup] = useState(false);
+  const [isRestaurant, setIsRestaurant] = useState(false);
+
+  const toggleAuthType = () => {
+    setIsSignup(!isSignup);
+  };
+
+  const toggleLoginType = () => {
+    setIsRestaurant(!isRestaurant);
+  };
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="w-full max-w-lg p-8 bg-white shadow-xl rounded-xl border border-gray-200">
+        {/* Toggle Button for Login/Signup */}
+        <div className="flex justify-center mb-6">
+          <button
+            onClick={toggleAuthType}
+            className={`py-2 px-8 text-lg font-semibold transition duration-300 ${!isSignup ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'} rounded-l-xl`}
+          >
+            {isSignup ? 'Already have an account?' : 'New here? Sign Up'}
+          </button>
+        </div>
+
+        {/* Toggle Button for User/Restaurant */}
+        <div className="flex justify-center mb-6">
+          <button
+            onClick={toggleLoginType}
+            className={`py-2 px-8 text-lg font-semibold transition duration-300 ${!isRestaurant ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'} rounded-l-xl`}
+          >
+            User
+          </button>
+          <button
+            onClick={toggleLoginType}
+            className={`py-2 px-8 text-lg font-semibold transition duration-300 ${isRestaurant ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'} rounded-r-xl`}
+          >
+            Restaurant
+          </button>
+        </div>
+
+        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
+          {isSignup ? (isRestaurant ? 'Restaurant Sign Up' : 'User Sign Up') : (isRestaurant ? 'Restaurant Login' : 'User Login')}
+        </h2>
+
+        <form className="space-y-6">
+          {/* Email Field */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+            />
+          </div>
+
+          {/* Password Field */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <input
+              type="password"
+              placeholder="Enter your password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+            />
+          </div>
+
+          {/* Confirm Password Field (for Sign Up) */}
+          {isSignup && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
+              {/* Address Field */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Address</label>
+                <input
+                  type="text"
+                  placeholder="Enter your address"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+                />
+              </div>
+
+              {/* Phone Number Field */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                <input
+                  type="text"
+                  placeholder="Enter your phone number"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-300"
+                />
+              </div>
+
+            
+            </motion.div>
+          )}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition duration-300"
+          >
+            {isSignup ? 'Sign Up' : 'Login'}
+          </button>
+
+          {/* Forgot Password Link (Only for Login) */}
+          {!isSignup && (
+            <p className="text-center text-sm text-gray-600 mt-4">
+              <a href="#" className="text-blue-600 hover:underline">
+                Forgot your password?
+              </a>
+            </p>
+          )}
+        </form>
+
+        {/* Switch between Login and Signup */}
+        <p className="text-center text-sm text-gray-600 mt-4">
+          {isSignup ? 'Already have an account? ' : "Don't have an account? "}
+          <button
+            onClick={toggleAuthType}
+            className="text-blue-600 hover:underline"
+          >
+            {isSignup ? 'Login' : 'Sign Up'}
+          </button>
+        </p>
+      </div>
+    </div>
+  );
+};
